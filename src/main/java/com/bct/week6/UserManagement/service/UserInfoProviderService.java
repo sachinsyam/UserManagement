@@ -21,7 +21,7 @@ public class UserInfoProviderService implements UserDetailsService {
       Optional<UserInfo> userInfo =   userInfoRepository.findByUsername(username);
     //Converting user info to UserDetails so that it can be returned.
     return userInfo.map(UserInfoToUserDetailsConversion::new)
-              .orElseThrow(()-> new UsernameNotFoundException("user not found"+username));
+              .orElseThrow(()-> new UsernameNotFoundException("user not found:"+username));
 
     }
 }

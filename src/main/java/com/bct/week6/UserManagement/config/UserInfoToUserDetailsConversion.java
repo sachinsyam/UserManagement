@@ -23,11 +23,12 @@ public class UserInfoToUserDetailsConversion implements UserDetails {
             .map(SimpleGrantedAuthority::new)
             .collect(Collectors.toList());
 
+
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

@@ -17,7 +17,8 @@ public class UserRegistrationService {
     public String addUser(UserInfo userInfo){
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         userInfoRepository.save(userInfo);
-        return "user registered";
+        //redirect to login page after registration
+        return "login-page";
     }
 
 }
