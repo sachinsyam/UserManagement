@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Gallery</title>
-<!--    <link th:href="@{/assets/css/style.css}" rel="stylesheet">-->
+    <title>Home</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -12,9 +12,84 @@
 
 </head>
 <style>
+      .zoom {
+  transition: transform .2s;
+  margin: 0 auto;
+}
 
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.03);
+}
 </style>
 <body>
-<h1>Home, Secured</h1>
+<div class="container">
+
+    <div class="d-flex flex-row-reverse">
+
+        <a class="btn btn-danger m-3" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+
+    </div>
+    <div class="mt-1 text-success" style="display: flex; flex-direction: row-reverse;">
+        <div>Logged in as   <span th:text="${username}"></span></div>
+    </div>
+
+
+    <p>
+    <h1 class="text-center">Gallery</h1>
+
+    <!-- Gallery -->
+    <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Boat on Calm Water"
+            />
+
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Wintry Mountain Landscape"
+            />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Mountains in the Clouds"
+            />
+
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Boat on Calm Water"
+            />
+        </div>
+
+        <div class="col-lg-4 mb-4 mb-lg-0">
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Waves at Sea"
+            />
+
+            <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
+                    class="w-100 shadow-1-strong rounded mb-4 zoom"
+                    alt="Yosemite National Park"
+            />
+        </div>
+    </div>
+    <!-- Gallery -->
+
+
+
+
+
+
+</div>
 </body>
 </html>

@@ -5,20 +5,32 @@ import com.bct.week6.UserManagement.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserInfoService {
     @Autowired
     private UserInfoRepository userInfoRepository;
 
+
+
     public List<UserInfo> loadAllUsers(){
         return  userInfoRepository.findAll();
     }
-    public Optional<UserInfo> searchUsers(String text){
-        return  userInfoRepository.findByUsername(text);
+    public List<UserInfo> searchUsers(String keyword){
+        return  userInfoRepository.findByKeyword(keyword);
     }
 
+    public UserInfo getUser(Long id){
+        return userInfoRepository.findById(id);
+     }
+    public void updateUser(UserInfo userInfo) {
+         userInfoRepository.save(userInfo);
+
+    }
+
+
+    public void delete(int id) {
+        userInfoRepository.deleteById(id);
+    }
 }

@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -43,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/app/welcome","/app/add","/app/signup","/app/registerUser")
+                .requestMatchers("/app/welcome","/app/add","/app/signup","/app/registerUser","/app/404")
                 .permitAll()
                 .and()
                 .authorizeHttpRequests()
@@ -52,7 +51,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-//                .defaultSuccessUrl("/app/home", true)
+                .defaultSuccessUrl("/app/home",true)
                 .and()
                 .build();
     }
