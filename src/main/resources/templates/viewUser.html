@@ -54,20 +54,19 @@
                 <label  class="form-label">Username</label>
                 <input th:value="${username}" name="username"  type="text" id="usernameIn" class="form-control" placeholder="Username">
             </div>
-            <div class="mb-3">
-                <label  class="form-label">Role</label>
-                <input  th:value="${role}" name="roles"  type="text" id="roleIn" class="form-control" placeholder="Role">
-            </div>
-
 <!--            <div class="mb-3">-->
 <!--                <label  class="form-label">Role</label>-->
-<!--                <select  th:field="{role}" name="roles" class="form-select" required>-->
-<!--                    <option disabled value="">Select Role</option>-->
-<!--                    <option value="ROLE_USER">USER</option>-->
-<!--                    <option value="ROLE_ADMIN">ADMIN</option>-->
-<!--                </select>-->
+<!--                <input  th:value="${role}" name="roles"  type="text" id="roleIn" class="form-control" placeholder="Role">-->
 <!--            </div>-->
 
+
+            <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select name="roles" class="form-select" required>
+                    <option value="ROLE_USER" th:selected="${role == 'ROLE_USER'}">USER</option>
+                    <option value="ROLE_ADMIN" th:selected="${role == 'ROLE_ADMIN'}">ADMIN</option>
+                </select>
+            </div>
 
 
             <div class="mb-3" id="passSection" hidden>
