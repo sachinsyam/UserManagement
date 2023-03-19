@@ -29,6 +29,7 @@
     <div class="d-flex flex-row-reverse">
 
         <a class="btn btn-danger m-3" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+        <a   th:if="${isAdmin}" class="btn btn-primary m-3" href="/app/admin">Admin Dashboard</a>
 
     </div>
     <div class="mt-1 text-success" style="display: flex; flex-direction: row-reverse;">

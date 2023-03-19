@@ -29,7 +29,7 @@ body {
 }
 .table-title {
     color: #fff;
-    background: #40b2cd;
+    background: #3d71b4;
     padding: 16px 25px;
     margin: -20px -25px 10px;
     border-radius: 3px 3px 0 0;
@@ -143,8 +143,8 @@ $(document).ready(function(){
     <div class="table-wrapper">
       <div class="table-title">
         <div class="row">
-          <div class="col-sm-6">
-            <h2>User <b>Details</b></h2>
+          <div class="col-sm-5">
+            <h2>User Management</h2>
           </div>
           <div class="col-sm-5">
             <div class="search-box">
@@ -157,7 +157,9 @@ $(document).ready(function(){
             </div>
             
           </div>
+          <a href="/app/createUser" type="button" class="btn btn-success btn-sm ml-2">Add</a>
           <a href="/logout" type="button" class="btn btn-danger btn-sm ml-2">Logout</a>
+          
         </div>
       </div>
       <table class="table table-striped">

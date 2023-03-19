@@ -51,6 +51,14 @@ public class UserController {
         String username = getCurrentUsername().getBody();
         model.addAttribute("username", username);
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+        System.out.println("USER ADMIN:"+hasUserRole);
+
+        model.addAttribute("isAdmin",hasUserRole);
+
 
         return "home-page";
     }
@@ -88,6 +96,28 @@ public class UserController {
 
         return "adminDashboard";
     }
+
+    @GetMapping("/admin2")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')") //method level role auth
+    //@PreAuthorize("hasRole(‘ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String admin2(Model model, String keyword){
+        List<UserInfo> users;
+        if(keyword == null){
+            users = userInfoService.loadAllUsers();
+        }
+        else{
+            users = userInfoService.searchUsers(keyword);
+            System.out.println(users);
+        }
+
+        model.addAttribute("users",users);
+
+        return "adminDashboard1";
+    }
+
+
+
     @GetMapping("/admin/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String viewUser(@PathVariable Long id, Model model){
