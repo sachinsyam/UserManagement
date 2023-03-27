@@ -3,6 +3,7 @@ package com.bct.week6.UserManagement.controller;
 import com.bct.week6.UserManagement.entity.UserInfo;
 import com.bct.week6.UserManagement.service.UserInfoService;
 import com.bct.week6.UserManagement.service.UserRegistrationService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -120,7 +121,7 @@ public class UserController {
     }
 
 
-
+    //To view user.
     @GetMapping("/admin/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String viewUser(@PathVariable Long id, Model model){
@@ -136,6 +137,16 @@ public class UserController {
         return "viewUser";
 
     }
+    @GetMapping("/admin/delete/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String deleteUserById(@PathVariable("id") int id){
+        System.out.println("delete user:"+id);
+        userInfoService.delete(id);
+        return "redirect:/app/admin";
+    }
+
+
+    //Update User
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("updateUser")
     public String updateUser(@ModelAttribute UserInfo updatedUser){
@@ -145,24 +156,46 @@ public class UserController {
         }
         else{
             updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+
         }
+
         userInfoService.updateUser(updatedUser);
 
         return "redirect:/app/admin/"+updatedUser.getId();
         //return "admin";
 
     }
+
+    //update username
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping("/updateUsername")
+    public Integer updateUsername(@RequestBody UserInfo userInfo){
+        userInfoService.updateUser2(userInfo);
+        return  userInfoService.updateUser2(userInfo);
+    }
+
+
+
+    //delete uer
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/deleteUser")
     public String deleteUser(@ModelAttribute UserInfo userInfo){
         userInfoService.delete(userInfo.getId());
         return "redirect:/app/admin";
     }
+
+
+
+    //view crete user page
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/createUser")
     public String createUser(){
         return "createUser";
     }
+
+
+
+    //Create user from admin dashboard
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/createUser")
     public String createNewUserFromAdminDashboard(@ModelAttribute UserInfo userInfo){
@@ -215,6 +248,15 @@ public String notFound(){
         System.out.println(userInfo);
         return userRegistrationService.addUser(userInfo);
     }
+
+//    public String getAllUser(){
+//        List <Integer> list = new List<>;
+//
+//        list.add(1);
+//        list.add(2);
+//
+//
+//    }
 
 
 

@@ -67,7 +67,13 @@ body {
 	color: #999;
 	margin-bottom: 30px;
 	text-align: center;
+}.signup-form .error-text {
+	color: #e40808;
+	margin-bottom: 30px;
+	text-align: center;
+    font-weight: 700;
 }
+
 .signup-form form {
 	color: #999;
 	border-radius: 3px;
@@ -116,27 +122,32 @@ body {
     <form  th:action="@{/app/registerUser}" th:object="${userInfo}"  method="post">
         <h2>Register</h2>
         <p class="hint-text">Create your account. </p>
+        <p id="errorMsg" hidden class="error-text">Please enter all fields</p>
         <div class="form-group">
             <div class="row">
-                <div  id="Name" class="col"><input type="text" class="form-control" name="Name" placeholder="Name" required="required"></div>
-                <div class="col"><input type="text" class="form-control" name="username" placeholder="username" required="required"></div>
+                <div  class="col">
+                    <input  oninput="validate()"  id="Name" type="text" class="form-control" name="Name" placeholder="Name" required="required">
+                </div>
+                <div class="col">
+                    <input  oninput="validate()"  id="username" type="text" class="form-control" name="username" placeholder="username" required="required">
+                </div>
             </div>
         </div>
 <!--        <div class="form-group">-->
 <!--            <input type="email" class="form-control" name="email" placeholder="Email" required="required">-->
 <!--        </div>-->
         <div class="form-group">
-            <input   type="password" oninput="checkPassword()" class="form-control" name="password" placeholder="Password" required="required" id="pass1">
+            <input   type="password" oninput="validate()" class="form-control" name="password" placeholder="Password" required="required" id="pass1">
         </div>
         <div class="form-group">
-            <input type="password" oninput="checkPassword()" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required" id="pass2">
+            <input type="password" oninput="validate()" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required" id="pass2">
         </div>
 <!--        <div class="form-group">-->
 <!--            <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>-->
 <!--        </div>-->
         <div class="form-group">
             <button disabled id="registerButton" type="submit" value="UserInfo" class="col-12 btn btn-success btn-lg btn-block">Register</button>
-<!--            <button type="button" onclick="checkPassword()" class="btn btn-success btn-lg btn-block">test Now</button>-->
+<!--            <button type="button" onclick="validate()" class="btn btn-success btn-lg btn-block">test Now</button>-->
         </div>
     </form>
     <div class="text-center">Already have an account? <a href="/app/home">Sign in</a></div>
@@ -146,20 +157,54 @@ body {
 
  
 <script>
-    function checkPassword(){
+
+    function validateRegrex (text) {
+        // letters, numbers, underscores, and periods.
+                const usernameRegex = /^[a-z0-9_.]+$/
+                    return usernameRegex.test(text)
+                }
+    
+
+
+    function validate(){
          const pass1 = document.getElementById("pass1").value;
          const pass2 = document.getElementById("pass2").value;
+         const name = document.getElementById("Name").value;
+         const username = document.getElementById("username").value;
          const registerBtn =  document.getElementById("registerButton");
+         const errorMsg =  document.getElementById("errorMsg");
 
-         if(pass1 != pass2 || pass1 == "" || pass2 ==""){
-            console.log("pass1<>pass2");
-           registerBtn.disabled=true;
-         }
+            console.log(username+validateRegrex(username));
+            console.log(name+validateRegrex(name));
+            console.log(pass1+validateRegrex(pass1));
+
+
+         if(pass1 != pass2 || 
+            pass1 == "" || 
+            pass2 == "" || 
+            name == "" || 
+            username == ""
+    
+            ){
+                console.log("Validation Failed");
+                registerBtn.disabled=true;
+                errorMsg.hidden=false;
+            }
+               else if(!validateRegrex(username) ||
+                       !validateRegrex(pass1)
+                       ){
+                console.log("Validation Failed");
+                registerBtn.disabled=true;
+                errorMsg.hidden=false;
+            }
+         
          else{
+            console.log("Validation Passed");
             registerBtn.disabled=false;
+            errorMsg.hidden=true;
          }
-    }
 
+        }
 
 </script>
 </html>

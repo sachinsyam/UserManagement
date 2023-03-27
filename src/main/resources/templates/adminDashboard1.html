@@ -9,13 +9,14 @@
   <title>SEARCH</title>
 </head>
 <body>
-<div class="container mt-5 text-center">
+<div class="container  mt-5 ">
   <h2 class="text-center">User Management</h2>
   <form th:action="@{/app/admin2}" method="get">
-    <div class="row mx-1  justify-content-center">
-      <input style="width: 50%;" class="form-control col-md-3" type="text" name="keyword" th:value="${keyword}"  placeholder="Search" >
-      <button type="submit" class="btn btn-primary col-2 mx-2" >Search</button>
-     <!-- <button type="submit" class="btn btn-info col-md-3" >Reset</button> -->
+    <div class="row d-flex justify-content-start mx-1">
+      <input style="width: 30%;" class="form-control col-md-3" type="text" name="keyword" th:value="${keyword}"  placeholder="Search" >
+      <button type="submit" class="btn btn-info col-2 mx-2" >Search</button>
+      
+
 
     </div>
 
