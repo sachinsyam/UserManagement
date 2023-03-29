@@ -1,7 +1,6 @@
 package com.bct.week6.UserManagement.repository;
 
 import com.bct.week6.UserManagement.entity.UserInfo;
-import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +19,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     UserInfo save(UserInfo userinfo);
 
-    //write a query to update username
+    // query to update username
 
 //    @Query(value="update user_info (username) values()")
 //    UserInfo update2(UserInfo userInfo);
@@ -29,6 +28,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     @Modifying
     @Query("update UserInfo set username= :updatedUsername  where id = :id")
     Integer updateUsername(String updatedUsername, int id);
+
 
 
   /*

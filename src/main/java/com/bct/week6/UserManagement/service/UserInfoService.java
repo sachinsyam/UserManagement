@@ -25,12 +25,12 @@ public class UserInfoService {
     public UserInfo getUser(Long id){
         return userInfoRepository.findById(id);
      }
-     //save user
+     //save user`
     public void updateUser(UserInfo userInfo) { userInfoRepository.save(userInfo);  }
 
-    public int updateUser2(UserInfo user){
-      return userInfoRepository.updateUsername(user.getUsername(),user.getId());
-    }
+//    public int updateUser2(UserInfo user){
+//      return userInfoRepository.updateUsername(user.getUsername(),user.getId());
+//    }
     //delete user
     public void delete(int id) {
         userInfoRepository.deleteById(id);

@@ -3,11 +3,10 @@ package com.bct.week6.UserManagement.controller;
 import com.bct.week6.UserManagement.entity.UserInfo;
 import com.bct.week6.UserManagement.service.UserInfoService;
 import com.bct.week6.UserManagement.service.UserRegistrationService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,8 +40,17 @@ public class UserController {
 
 
     //  UserInfo userInfo;
+
+
+    @Value("${MY_ENV_VAR}")
+    private String MY_ENV_VAR;
+
     @GetMapping("/welcome")
     public String welcome(){
+
+
+        System.out.println(MY_ENV_VAR);
+
         return "welcome";
     }
 
@@ -166,17 +174,10 @@ public class UserController {
 
     }
 
-    //update username
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PostMapping("/updateUsername")
-    public Integer updateUsername(@RequestBody UserInfo userInfo){
-        userInfoService.updateUser2(userInfo);
-        return  userInfoService.updateUser2(userInfo);
-    }
 
 
 
-    //delete uer
+    //delete user
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/deleteUser")
     public String deleteUser(@ModelAttribute UserInfo userInfo){
@@ -186,7 +187,7 @@ public class UserController {
 
 
 
-    //view crete user page
+    //view create user page
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/createUser")
     public String createUser(){
@@ -258,6 +259,14 @@ public String notFound(){
 //
 //    }
 
+//test
+//update username
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//@PostMapping("/updateUsername")
+//public Integer updateUsername(@RequestBody UserInfo userInfo){
+//    userInfoService.updateUser2(userInfo);
+//    return  userInfoService.updateUser2(userInfo);
+//}
 
 
 
